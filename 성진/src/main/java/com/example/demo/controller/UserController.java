@@ -106,16 +106,18 @@ public class UserController {
 		session.setAttribute("email_auth",tmpPassword);
 	}
 	@GetMapping("/auth/confirm/{code}")
-		public @ResponseBody String checkemailcode(@PathVariable String code, HttpServletRequest request) {
-		System.out.println("GET/user/auth/confirm" + code);
+	public @ResponseBody String email_auth_confirm(@PathVariable String code,HttpServletRequest request)
+	{
+		System.out.println("GET /user/auth/confirm " + code);
 		HttpSession session = request.getSession();
-		String checkemailcode = (String) session.getAttribute("checkemailcode");
-		if (checkemailcode != null) {
-			if (checkemailcode.equals(code)) {
-				session.setAttribute("checkEmail", true);
+		String auth_code = (String)session.getAttribute("email_auth_code");
+		if(auth_code!=null)
+		{
+			if(auth_code.equals(code)){
+				session.setAttribute("is_email_auth",true);
 				return "success";
-			} else {
-				session.setAttribute("checkEmail", false);
+			}else{
+				session.setAttribute("is_email_auth",false);
 				return "failure";
 			}
 		}

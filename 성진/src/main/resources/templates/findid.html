@@ -163,7 +163,7 @@
              xhr.onreadystatechange = function () {
                  if (xhr.readyState === 4) {
                      if (xhr.status === 200) {
-                         alert(xhr.responseText);
+                         alert("찾으시는 EMAIL은 "+xhr.responseText+"입니다🙏");
 
                          window.location.href = "/login";
                      } else {

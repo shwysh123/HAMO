@@ -28,7 +28,7 @@ public ResponseEntity<String> findId(@RequestBody FindRequest findIdRequest) {
 
 
     if(foundUser != null){
-        return ResponseEntity.ok("사용자 EMAIL : " + foundUser.getEmail());
+        return ResponseEntity.ok(foundUser.getEmail());
     }else {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("사용자를 찾을 수 없습니다.");
     }

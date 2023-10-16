@@ -50,7 +50,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 		http
 				.authorizeRequests()
 				.antMatchers("/","/public","/login","/join","/checkDuplicate",
-						"/checkNicknameDuplicate","/findid","/resetpw","/findpw","/checkPhoneDuplicate").permitAll()
+						"/checkNicknameDuplicate","/findid","/resetpw","/sendemail","/checkPhoneDuplicate").permitAll()
 				.antMatchers("/css/**","/js/**","/images/**").permitAll()
 				.antMatchers("/user").hasRole("USER")				//ROLE_USER
 				.antMatchers("/admin").hasRole("ADMIN")				//ROLE_ADMIN
@@ -60,23 +60,22 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 				//로그인
 				.formLogin()
 				.loginPage("/login")
-				.successHandler(new CustomLoginSuccessHandler())					//ROLE_USER -> user페이지 / ROLE_MEMBER -> member페이지
+				.successHandler(new CustomLoginSuccessHandler())
 				.failureHandler(new CustomAuthenticationFailureHandler())
 
 				.and()
-//			//로그아웃
+				//로그아웃
 				.logout()
 				.logoutUrl("/logout")
 				.permitAll()
-				.addLogoutHandler(new CustomLogoutHandler())						//세션초기화
-//				.addLogoutHandler(new OAuthLogoutHandler())
-				.logoutSuccessHandler(new CustomLogoutSuccessHandler())				//기본위치로 페이지이동
+				.addLogoutHandler(new OAuthLogoutHandler())
+				.logoutSuccessHandler(new CustomLogoutSuccessHandler())
 
 				.and()
 				//예외처리
 				.exceptionHandling()
-				.authenticationEntryPoint(new CustomAuthenticationEntryPoint())		//인증이 필요한 자원에 접근 예외처리
-				.accessDeniedHandler(new CustomAccessDeniedHandler())				//권한 실패 예외처리
+				.authenticationEntryPoint(new CustomAuthenticationEntryPoint())      //권한 실패 예외처리
+				.accessDeniedHandler(new CustomAccessDeniedHandler())
 
 				//REMEMBER ME
 				.and()
@@ -88,64 +87,41 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 				.userDetailsService(principalDetailsOAuth2Service)
 
 				.and()
-				//OAUTH2
+				//OAUTTH2
 				.oauth2Login()
 				.userInfoEndpoint()
 				.userService(principalDetailsOAuth2Service);
-
-
 	}
 
-	//----------------------------------------------------------------
-	// 인증처리 함수
-	//----------------------------------------------------------------
+	//--------------------------------
+	//인층처리 함수
+	//--------------------------------
 	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//		auth
-//			.inMemoryAuthentication()
-//				.withUser("user")
-//				.password(passwordEncoder().encode("1234"))
-//				.roles("USER");
-//		auth
-//			.inMemoryAuthentication()
-//				.withUser("member")
-//				.password(passwordEncoder().encode("1234"))
-//				.roles("MEMBER");
-//		auth
-//			.inMemoryAuthentication()
-//				.withUser("admin")
-//				.password(passwordEncoder().encode("1234"))
-//				.roles("ADMIN");
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception{
 
 		auth.userDetailsService(principalDetailsOAuth2Service)
 				.passwordEncoder(passwordEncoder());
 
 	}
+	//--------------------------------
+	//BAENS
+	//--------------------------------
 
-
-	//----------------------------------------------------------------
-	//BEANS
-	//----------------------------------------------------------------
-
-	// BCryptPasswordEncoder Bean 등록
-	// 패스워드 검증에 사용
+	//BCryotPasswordEncoder Bean 등록
+	//패스워드 검증에 사용
 	@Bean
-	public PasswordEncoder passwordEncoder() {
+	public PasswordEncoder passwordEncoder(){
 		return new BCryptPasswordEncoder();
+
 	}
 
 	//REMEMBER ME BEAN 추가
-
 	@Bean
 	public PersistentTokenRepository tokenRepository() {
+
 		JdbcTokenRepositoryImpl repo = new JdbcTokenRepositoryImpl();
 		repo.setDataSource(dataSource);
-		//repo.setCreateTableOnStartup(true);
 		return repo;
 	}
-
-
-
-
 
 }

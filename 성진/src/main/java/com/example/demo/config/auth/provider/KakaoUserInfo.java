@@ -5,31 +5,29 @@ import lombok.Data;
 import java.util.Map;
 
 @Data
-public class KakaoUserInfo implements OAuth2UserInfo{
+public class KakaoUserInfo implements OAuth2UserInfo {
 
     private String id;
 
     private Map<String,Object> attributes;
 
-    public KakaoUserInfo(Map<String, Object> attributes) {
+    public KakaoUserInfo(Map<String,Object> attributes) {
         this.attributes = attributes;
     }
-
     @Override
-    public String getProviderId() {
+    public String getProviderId(){
         return id;
     }
-
     @Override
-    public String getProvider() {
+    public String getProvider(){
         return "kakao";
     }
     @Override
-    public String getEmail() {
+    public String getEmail(){
         return (String)attributes.get("email");
     }
     @Override
-    public String getName() {
-        return (String)attributes.get("nickname");
+    public String getName(){
+        return (String) attributes.get("nickname");
     }
 }

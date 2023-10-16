@@ -23,7 +23,7 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
             try{
                 System.out.println("role : "+ role.getAuthority());
                 String role_str = role.getAuthority();
-               if (role_str.equals("ROLE_MEMBER")){
+               if (role_str.equals("ROLE_USER")){
                     System.out.println("메인페이지로 이동!");
                     response.sendRedirect(request.getContextPath()+"/list");
                     return;

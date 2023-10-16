@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>비밀번호찾기</title>
+    <title>메일 보내기</title>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -93,7 +93,7 @@
 </header>
 <main>
     <div class="formbox">
-        <form name="findpw" action="/findpw" method="post" onsubmit="return false">
+        <form name="findpw" action="/sendemail" method="post" onsubmit="return false">
             <div>
                 <div >
                     <h5 for="emailInput">이메일</h5>
@@ -111,6 +111,56 @@
         </form>
     </div>
 </main>
+<script>
 
+    const phoneInput = document.getElementById("phoneInput");
+
+    phoneInput.addEventListener("input", function(){
+        const inputValue = phoneInput.value.replace(/\D/g, "");
+
+        phoneInput.value = inputValue;
+
+ if (inputValue.length >= 7) {
+        phoneInput.value =
+            inputValue.slice(0, 3) +
+            "-" +
+            inputValue.slice(3, 7) +
+            "-" +
+            inputValue.slice(7);
+    }
+});
+</script>
+<script>
+    const sendemail = () => {
+            const form = document.findpw;
+            const phoneInput = form.phoneInput.value.trim();
+            const email = emailInput.value;
+
+            if (form.email.value.trim() ==  "")
+            {
+                alert("이메일을 입력하세요.");
+                return;
+            }
+            const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            if (!emailPattern.test(email)){
+                alert("올바른 이메일 주소 형식이 아닙니다.");
+                return;
+            }
+            if (form.phone.value.trim() == "")
+            {
+                alert("휴대폰번호를 입력하세요.");
+                return;
+            }
+            const pattern = /^010-\d{4}-\d{4}$/;
+            if (!pattern.test(phoneInput)){
+                alert("올바른 휴대폰 번호를 입력하세요.");
+                return;
+            }
+            alert("입력하신 이메일로 초기화 링크가 전송되었습니다🙏");
+
+       form.submit();
+        }
+
+</script>
 </body>
 </html>

@@ -84,6 +84,10 @@ dependencies {
 
 	//MAIL
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
+
+	//Thumbnails
+	implementation group: 'net.coobird', name: 'thumbnailator', version: '0.4.1'
+
 }
 
 tasks.named('test') {
