@@ -28,8 +28,8 @@ public class SimpleController {
 	}
 	@GetMapping("/findid")
 	public void findid() {log.info("GET/findid...");}
-	@GetMapping("/sendemail")
-	public void sendemail() {log.info("GET/sendemail...");}
+	@GetMapping("/emailcheck")
+	public void emailcheck() {log.info("GET/emailcheck...");}
 	@GetMapping("/resetpw")
 	public void resetpw() {log.info("GET/resetpw...");}
 	@GetMapping("/checkNicknameDuplicate")
@@ -42,6 +42,8 @@ public class SimpleController {
 	public void checkPhoneDuplicate_get(){
 		log.info("GET/checkPhoneDuplicate");
 	}
+	@GetMapping("/resetpw")
+	public void resetpw_get(){log.info("GET/resetpw");}
 
 
 }

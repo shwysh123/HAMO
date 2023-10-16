@@ -93,47 +93,30 @@
 </header>
 <main>
     <div class="formbox">
-        <form name="findpw" action="/sendemail" method="post" onsubmit="return false">
+        <form name="findpw" action="/emailcheck" method="post" onsubmit="return false">
             <div>
                 <div >
                     <h5 for="emailInput">이메일</h5>
                     <input name="email" id="emailInput">
                 </div>
-                <div>
-                    <h5 for="phoneInput">휴대폰</h5>
-                    <input name="phone" id="phoneInput" maxlength="13"><br/>
+            <div class="jechul">
+                <button onclick="sendemail()">메일 보내기</button>
+            </div>
+            <div >
+                <h5 for="codeInput">인증번호</h5>
+                <input name="code" id="codeInput">
+            </div>
+                <div class="jechul">
+                    <button onclick="emailcheck()">인증하기</button>
                 </div>
             </div>
-            <div class="jechul">
-                <button onclick="sendemail()">메일 인증하기</button>
-            </div>
-
         </form>
     </div>
 </main>
-<script>
 
-    const phoneInput = document.getElementById("phoneInput");
-
-    phoneInput.addEventListener("input", function(){
-        const inputValue = phoneInput.value.replace(/\D/g, "");
-
-        phoneInput.value = inputValue;
-
- if (inputValue.length >= 7) {
-        phoneInput.value =
-            inputValue.slice(0, 3) +
-            "-" +
-            inputValue.slice(3, 7) +
-            "-" +
-            inputValue.slice(7);
-    }
-});
-</script>
 <script>
     const sendemail = () => {
             const form = document.findpw;
-            const phoneInput = form.phoneInput.value.trim();
             const email = emailInput.value;
 
             if (form.email.value.trim() ==  "")
@@ -146,17 +129,8 @@
                 alert("올바른 이메일 주소 형식이 아닙니다.");
                 return;
             }
-            if (form.phone.value.trim() == "")
-            {
-                alert("휴대폰번호를 입력하세요.");
-                return;
-            }
-            const pattern = /^010-\d{4}-\d{4}$/;
-            if (!pattern.test(phoneInput)){
-                alert("올바른 휴대폰 번호를 입력하세요.");
-                return;
-            }
-            alert("입력하신 이메일로 초기화 링크가 전송되었습니다🙏");
+
+            alert("입력하신 이메일로 인증번호가 전송되었습니다🙏");
 
        form.submit();
         }

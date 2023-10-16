@@ -44,6 +44,14 @@ public class UserController {
 	private BoardRepository boardRepository;
 
 
+	@PostMapping("/login")
+	public String login_post(@RequestParam("email") String email, @RequestParam("password") String password, HttpSession session, Model model) {
+		log.info("GET/login");
+
+
+		return "redirect:/list";
+	}
+
 	@PostMapping("/join")
 	public String join_post(UserDto dto) {
 		log.info("POST /join "+dto);
