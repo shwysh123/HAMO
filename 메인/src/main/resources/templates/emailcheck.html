@@ -106,7 +106,7 @@
         </form>
     </div>
     <div class="formbox">
-        <form name="codecheck" action="/codecheck" method="post" onsubmit="return false">
+        <form name="codecheck" method="post" onsubmit="return false">
                 <div>
                     <div>
                     <h5 for="codeInput">인증번호</h5>
@@ -153,13 +153,14 @@
 
     const email = document.getElementById("emailInput").value;
 
-    fetch("/sendemail?email"+email, {
+    fetch("/sendemail?email=" + email, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
+     body: JSON.stringify({ email: email }),
     })
-    .then((response) => response.text())
+    .then((response) => response.json())
     .then((data) => {
             alert("메일이 전송되었습니다.");
             console.log("인증코드 : " + data);
