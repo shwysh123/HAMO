@@ -87,51 +87,8 @@ public class UserController {
 		return "redirect:login?msg=Join_Success!";
 
 	}
-	//메일인증//
-	@GetMapping(value="auth/email/{email}")
-	public @ResponseBody void email_auth(@PathVariable String email,HttpServletRequest request)
-	{
-		log.info("GET/user/auth/email.."+email);
-		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-		mailSender.setHost("stmp.gmail.com");
-		mailSender.setPort(587);
 
-		Properties props = new Properties();
-		props.put("mail.smtp.auth","true");
-		props.put("mail.smtp.starttls.enable","true");
-		mailSender.setJavaMailProperties(props);
-
-		String tmpPassword =(int)(Math.random()*10000000)+"";
-
-		SimpleMailMessage message = new SimpleMailMessage();
-		message.setTo(email);
-		message.setSubject("이메일 인증 코드 발송");
-		message.setText(tmpPassword);
-
-		mailSender.send(message);
-
-		HttpSession session = request.getSession();
-		session.setAttribute("email_auth",tmpPassword);
-	}
-	@GetMapping("/auth/confirm/{code}")
-	public @ResponseBody String email_auth_confirm(@PathVariable String code,HttpServletRequest request)
-	{
-		System.out.println("GET /user/auth/confirm " + code);
-		HttpSession session = request.getSession();
-		String auth_code = (String)session.getAttribute("email_auth_code");
-		if(auth_code!=null)
-		{
-			if(auth_code.equals(code)){
-				session.setAttribute("is_email_auth",true);
-				return "success";
-			}else{
-				session.setAttribute("is_email_auth",false);
-				return "failure";
-			}
-		}
-		return "failure";
-	}
-	//================================================================
+//	//================================================================
 
 	@PostMapping("/checkDuplicate")
 	public ResponseEntity<Map<String, Boolean>> checkDuplicate(@RequestParam("field") String field, @RequestParam("value") String value) {

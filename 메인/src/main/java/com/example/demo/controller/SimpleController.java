@@ -42,8 +42,6 @@ public class SimpleController {
 	public void checkPhoneDuplicate_get(){
 		log.info("GET/checkPhoneDuplicate");
 	}
-	@GetMapping("/resetpw")
-	public void resetpw_get(){log.info("GET/resetpw");}
-
-
+	@GetMapping("/sendemail")
+	public void sendemail_get() {log.info("GET/sendemail"); }
 }

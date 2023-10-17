@@ -93,48 +93,81 @@
 </header>
 <main>
     <div class="formbox">
-        <form name="findpw" action="/emailcheck" method="post" onsubmit="return false">
+        <form name="sendemail" method="post" onsubmit="return false">
             <div>
-                <div >
+
                     <h5 for="emailInput">이메일</h5>
+                <div style="display : flex;">
                     <input name="email" id="emailInput">
-                </div>
-            <div class="jechul">
-                <button onclick="sendemail()">메일 보내기</button>
-            </div>
-            <div >
-                <h5 for="codeInput">인증번호</h5>
-                <input name="code" id="codeInput">
-            </div>
-                <div class="jechul">
-                    <button onclick="emailcheck()">인증하기</button>
+                    <button class="jung-btn" id="checkDuplicatebtn" onclick="checkDuplicate('emailInput')">회원가입 체크</button>
+                    <button class="jung-btn" id="sendEmailbtn" style="display: none;" onclick="sendemailFunction()">메일 보내기</button><br/>
                 </div>
             </div>
+        </form>
+    </div>
+    <div class="formbox">
+        <form name="codecheck" action="/codecheck" method="post" onsubmit="return false">
+                <div>
+                    <div>
+                    <h5 for="codeInput">인증번호</h5>
+                    <input name="code" id="codeInput">
+                    <button class="jung-btn" onclick="codecheck()">인증하기</button>
+                    </div>
+                </div>
         </form>
     </div>
 </main>
 
 <script>
-    const sendemail = () => {
-            const form = document.findpw;
-            const email = emailInput.value;
-
-            if (form.email.value.trim() ==  "")
-            {
-                alert("이메일을 입력하세요.");
-                return;
+    let isEmailChecked = false;
+    function checkDuplicate(emailInput) {
+        const inputValue = $("#" + emailInput).val();
+        $.ajax({
+            url: "/checkDuplicate",
+            type: "POST",
+            data: {value: inputValue, field: emailInput},
+            success: function (response) {
+                if (response.duplicate) {
+                      alert("가입된 EMAIL입니다. 인증번호를 보내주세요.");
+                      isEmailChecked = false;
+                      document.getElementById("checkDuplicatebtn").style.display = "none";
+                      document.getElementById("sendEmailbtn").style.display = "block";
+                } else {
+                    alert("가입되지 않은 이메일입니다.");
+                    isEmailChecked = true;
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error("오류 발생 : ", error);
+                isEmailChecked = false;
             }
-            const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-            if (!emailPattern.test(email)){
-                alert("올바른 이메일 주소 형식이 아닙니다.");
-                return;
-            }
+        });
+    }
 
-            alert("입력하신 이메일로 인증번호가 전송되었습니다🙏");
 
-       form.submit();
-        }
+    function sendemailFunction(){
+    if(isEmailChecked) {
+    alert("회원 가입유무를 먼저 체크해주세요🙏");
+    return;
+    }
 
+    const email = document.getElementById("emailInput").value;
+
+    fetch("/sendemail?email"+email, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+    .then((response) => response.text())
+    .then((data) => {
+            alert("메일이 전송되었습니다.");
+            console.log("인증코드 : " + data);
+    })
+    .catch((error) =>{
+        console.error("메일 전송 중 오류 발생:", error);
+        });
+    }
 </script>
 </body>
 </html>

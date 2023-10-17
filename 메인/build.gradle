@@ -81,8 +81,7 @@ dependencies {
 	implementation 'javax.servlet:jstl'
 
 	//MAIL
-	implementation 'org.springframework.boot:spring-boot-starter-mail'
-
+	implementation 'org.springframework.boot:spring-boot-starter-mail:2.7.1'
 	//Thumbnails
 	implementation group: 'net.coobird', name: 'thumbnailator', version: '0.4.1'
 

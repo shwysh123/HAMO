@@ -113,38 +113,7 @@
 </main>
 <script>
     function resetpw() {
-             const passwordInput = document.getElementById("passwordInput");
-             const passwordConfirmInput = document.getElementById("passwordConfirmInput");
 
-
-             const name = nameInput.value;
-             const question = questionInput.value;
-             const answer = answerInput.value;
-             const phone = phoneInput.value;
-
-             const xhr = new XMLHttpRequest();
-             xhr.open('POST', '/findid', true);
-             xhr.setRequestHeader('Content-Type', 'application/json');
-             xhr.onreadystatechange = function () {
-                 if (xhr.readyState === 4) {
-                     if (xhr.status === 200) {
-                         alert("찾으시는 EMAIL은 "+xhr.responseText+"입니다🙏");
-
-                         window.location.href = "/login";
-                     } else {
-                         alert('사용자를 찾을 수 없습니다.');
-                     }
-                 }
-             };
-
-             const data = {
-                 question: question,
-                 answer: answer,
-                 phone: phone,
-                 name: name
-             };
-             xhr.send(JSON.stringify(data));
-         }
 </script>
 
 </body>
