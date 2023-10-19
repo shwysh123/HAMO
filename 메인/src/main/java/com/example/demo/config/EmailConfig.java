@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
 import java.util.Properties;
 
 @Configuration
@@ -15,8 +17,8 @@ public class EmailConfig {
         JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
 
         javaMailSender.setHost("smtp.naver.com");
-        javaMailSender.setUsername("shwysh123@naver.com");
-        javaMailSender.setPassword("dhrgml!8sus");
+        javaMailSender.setUsername("shwysh123");
+        javaMailSender.setPassword("Dhrgml!8sus");
 
         javaMailSender.setPort(465); // 메일 인증서버 포트
 
@@ -33,8 +35,13 @@ public class EmailConfig {
         properties.setProperty("mail.debug", "true");
         properties.setProperty("mail.smtp.ssl.trust","smtp.naver.com");
         properties.setProperty("mail.smtp.ssl.enable","true");
+        properties.setProperty("mail.smtp.password", "Dhrgml!8sus");
         return properties;
+
+
     }
+
+
 }
 
 

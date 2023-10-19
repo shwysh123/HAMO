@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> <!-- Axios 추가 -->
+
 
     <!-- 구글폰트 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -106,17 +108,38 @@
         </form>
     </div>
     <div class="formbox">
-        <form name="codecheck" method="post" onsubmit="return false">
+        <form name="checkcode" method="post" onsubmit="return false">
                 <div>
                     <div>
                     <h5 for="codeInput">인증번호</h5>
                     <input name="code" id="codeInput">
-                    <button class="jung-btn" onclick="codecheck()">인증하기</button>
+                    <button class="jung-btn" id="checkcode" onclick="checkcodeFunction()">인증하기</button>
                     </div>
                 </div>
         </form>
     </div>
 </main>
+
+<script>
+        function checkcodeFunction(){
+        const enteredCode = document.getElementById("codeInput").value;
+
+        axios.post("/checkcode", { code: enteredCode})
+            .then((response) => {
+                if(response.data === "authenticated"){
+                alert("인증이 완료되었습니다.");
+                window.location.href = "/resetpw";
+                }else{
+                alert("인증 코드가 올바르지 않습니다.");
+                }
+                })
+        .catch((error) => {
+        alert("오류가 발생했습니다.");
+        console.error("인증 코드 확인 중 오류 발생 : ", error);
+        });
+    }
+</script>
+
 
 <script>
     let isEmailChecked = false;
@@ -153,22 +176,17 @@
 
     const email = document.getElementById("emailInput").value;
 
-    fetch("/sendemail?email=" + email, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-     body: JSON.stringify({ email: email }),
+    axios.post("/sendemail?email=" + email, {email: email})
+        .then((response) => {
+        alert("메일이 전송되었습니다.");
+        console.log("인증코드 : "+response.data);
     })
-    .then((response) => response.json())
-    .then((data) => {
-            alert("메일이 전송되었습니다.");
-            console.log("인증코드 : " + data);
-    })
-    .catch((error) =>{
-        console.error("메일 전송 중 오류 발생:", error);
+    .catch((error) => {
+        alert("오류가 발생했습니다.");
+        console.error("메일 전송 중 오류 발생 : ", error);
         });
     }
 </script>
+
 </body>
 </html>
