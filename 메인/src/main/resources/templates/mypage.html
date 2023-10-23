@@ -4,53 +4,39 @@
     <meta charset="UTF-8">
     <title>Title</title>
 
+    <!-- 부트스트랩 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+
     <!-- 구글폰트 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@500&display=swap" rel="stylesheet">
 
+    <link rel="stylesheet" href="/css/board.css">
+
     <style>
-        *{
-            font-family: 'Gothic A1', sans-serif;
-        }
-        body {
-            width: 1024px;
-            height: 860px;
-            margin: 50px auto;
-            overflow: auto;
-            max-height: 860px;
-        }
 
-        header{
+        .mypage{
+            font-weight: 800;
 
         }
 
-        .top-header{
-            display : flex;
-            padding-left : 50px;
+        .mypage>img{
+            border : 2px solid gray;
         }
 
-        .top-header > a{
-            align-self : center;
+        main>section{
+            margin-top : 50px;
+            margin-bottom : 50px;
         }
 
-        .top-header > h2 {
-            margin-left : 30px;
-        }
-
-        header > nav{
-            width : 100%;
+        main>section>.profile{
             height : 200px;
-            border : 1px solid black;
+            width : 1000px;
             display: flex;
-            align-items : center;
-        }
-
-        .profile{
-            height : 150px;
-            width : 150px;
-            margin-left : 40px;
-            margin-right : 60px;
+            border-bottom : 1px solid rgb(185, 185, 185);
         }
 
         .profileimg{
@@ -58,246 +44,339 @@
             width : 150px;
             border : 1px solid gray;
             border-radius: 50%;
-        }
-        .profileimg img {
-            max-width: 100%;
-            height: 100%;
-            border-radius: 50%;
-        }
-        .profile-menu{
-            display:flex;
-            margin-top : 20px;
+            margin-left : 100px;
         }
 
-        .profileupdate-btn{
-            position : relative;
-            bottom:40px;
-            left : 110px;
+        main>section>.profile>.menu{
+            margin-left : 30px;
+        }
+
+        main>section>.profile>.menu>.top-menu{
+            display:  flex;
+            align-items: center;
+            justify-content: left;
+            margin-top : 10px;
+            margin-bottom : 20px;
+        }
+
+        main>section>.profile>.menu>.top-menu>span{
+            margin-left : 50px;
+            margin-right : 50px;
+        }
+
+        main>section>.profile>.menu>.top-menu>a{
+
         }
 
         .follow-box{
             display : flex;
             width : 500px;
             height : 150px;
-            justify-content : space-around;
+            justify-content : left;
         }
 
-        .follow{
-            line-height: 100px;
+        .follow-box>a{
+            line-height: 50px;
+            text-decoration: none;
+            color: black;
+            cursor : pointer;
+        }
+
+        .follow-box>.follower{
+            margin-left : 50px;
+            margin-right : 50px;
         }
 
         .no{
-            line-height: 0px;
-            text-align: center;
+            font-weight: 600;
         }
 
-       .board-container {
-            width: 80%;
-            margin: 0 auto;
-            margin-top : 60px;
-        }
-
-        .board-item {
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            padding: 10px;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .idbox{
-            display: flex;
-            justify-content :space-between;
-            align-items : center;
-            margin-bottom : 20px;
-        }
-
-        .menu-btn{
-            all: unset;
-            cursor: pointer;
-        }
-
-        .sub-menu{
-            position : absolute;
-        }
-
-        .sub-menu > a{
-            display: flex;
-            border-bottom : 1px solid gray;
-            border-left : 1px solid gray;
-            border-right : 1px solid gray;
-            width : 110px;
-            justify-content :space-between;
-            align-items : center;
-            position: relative;
-            right : 158px;
-            bottom : 15px;
-            font-style: none;
+        .dropdown-toggle{
+            border-style: none;
             background-color: white;
-            padding-left: 20px;
-            padding-right: 20px;
+            color: gray;
+            position : relative;
+            top : 25px;
+            right : 10px;
+            z-index : 1;
         }
 
-        .update{
-            border-top : 1px solid gray;
+        .dropdown-toggle:hover{
+            background-color: rgb(196, 193, 193);
         }
 
-        .delete_btn{
-            pointer : cursor;
+        .hits-box{
+            position : relative;
+            left : 50px;
         }
 
-        /* contents 크기 조정 */
-        .contents {
-            font-size: 16px;
-            padding: 20px;
+        main>section>.s_board .board-item>a>#board_img{
+
         }
 
-        /* 이미지 크기 조정 */
-        .thumbnail {
-            width: 200px;
-            height: auto;
-        }
-        .scroll::-webkit-scrollbar{
-            display: none;
+        main>section>.s_board .board-item>a>#board_img>.img{
+            height : 300px;
+            width : 300px;
+            background-color: rgb(0, 0, 0);
         }
 
-        #board_id{
-            margin-left : 40px;
-        }
-        #board_contents{
-            border: 1px solid black;
-            height:100px;
-        }
-        #board_img{
-            border: 1px solid black;
-            height: 200px;
-        }
-        #board_hits_like{
-            display: flex;
-            justify-content:center;
-        }
-/* 모달 스타일 */
-
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    z-index: 1;
-    overflow: auto;
-}
-
-.modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 50%;
-    max-width: 600px;
-    text-align: center;
-    position: relative;
-}
-
-.close {
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 10px;
-    cursor: pointer;
-}
-
-/* 파일 업로드 폼 스타일 */
-#profileUploadForm {
-    margin-top: 20px;
-}
     </style>
 
 </head>
-<body>
+
+<body class="scroll">
+
+<!-- ------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
 <header>
-    <div class="top-header">
+    <div class="menu">
+        <div class="top-menu">
 
-        <a href="/list"> <img src="/images/logo.png" max-width="100%" height="40" /> </a>
+            <div class="logo">
+                <a href="/list"> <img src="images/logo.png" max-width="100%" height="15"/> </a>
+            </div>
 
-        <h2><span th:text="${dto.nickname}" ></span>'s Page</h2>
+            <div class="middle-menu">
+                <a href="/list">
+                    <div class="home">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
+                            <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z"/>
+                        </svg>홈
+                    </div>
+                </a>
+
+                <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                    </svg>
+                    검색
+                </button>
+
+                <a href="#" id="notification-icon">
+                    <div class="message">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-left-dots" viewBox="0 0 16 16">
+                            <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                            <path d="M5 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                        </svg>메시지
+                    </div>
+                </a>
+
+                <button type="button" class="btn btn-primary position-relative bell" data-bs-toggle="offcanvas" data-bs-target="#offcanvas" aria-controls="offcanvas">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
+                        <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z"/>
+                    </svg>알림
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        99+
+                        <span class="visually-hidden">unread messages</span>
+                    </span>
+                </button>
+
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
+                        <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                    </svg>글쓰기
+                </button>
+
+                <a href="/mypage">
+                    <div class="mypage" style="font-size : 1.2rem;">
+                        <img th:src="${#authentication.getPrincipal().getUser().getProfile()}" style="width:22px;height:22px;border-radius:50%;" />프로필
+                    </div>
+                </a>
+            </div>
+        </div>
+
+
+
+        <div class="logout">
+            <form method="post" action="/logout">
+                <button class="logout-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z"/>
+                        <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/>
+                    </svg>로그아웃
+                </button>
+            </form>
+        </div>
+
     </div>
-    <nav>
-        <div class="profile">
-            <div class="profileimg" style="display:flex;justify-content:center; align-items : center;">
+</header>
 
-                <img th:src="${dto.profile}" style="width:100px;height:100px;border-radius:50%;" />
-            </div>
-            <div class="profile-menu">
-                <button class="profileupdate-btn" id="profileBtn">@@@@</button>
-            </div>
+<!-- ------------------------------------------------------------------------------------------------------------------------------ -->
+
+
+<div class="up">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-square-fill" viewBox="0 0 16 16">
+        <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm4 9h8a.5.5 0 0 0 .374-.832l-4-4.5a.5.5 0 0 0-.748 0l-4 4.5A.5.5 0 0 0 4 11z"/>
+    </svg>
+</div>
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h5 id="offcanvasRightLabel">검색</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+
+        <div class="searchbox">
+            <form id="searchForm" method="GET">
+                <select class="form-select" aria-label="Default select example" id="searchOption">
+                    <option value="nickname">닉네임</option>
+                    <option value="content">내용</option>
+                </select>
+                <input type="text" name="keyword" class="form-control" id="searchKeyword">
+                <button type="submit" class="btn btn-outline-secondary" id="searchButton">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                    </svg>
+                </button>
+            </form>
         </div>
-        <div class="follow-box">
-            <div class="follow">팔로워
-                <div class="no">100</div>
-            </div>
-            <div class="follow">팔로잉
-                <div class="no">100</div>
-            </div>
+
+    </div>
+</div>
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasExampleLabel">알림</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <div>
+            여기에 알림
         </div>
-        <button class="update-btn"><a href="/profile/update">내 정보 수정</a></button>
-    </nav>
-    <!-- 모달 창 -->
-    <div id="profileModal" class="modal">
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
         <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>프로필 사진 변경</h2>
-            <!-- 업로드 폼 추가 -->
-            <form id="profileUploadForm" action="/uploadProfile" method="post" enctype="multipart/form-data">
-                <!-- 프로필 사진을 업로드하는 파일 입력 필드를 추가 -->
-                <input type="file" name="profileImage" accept="image/*">
-                <input type="submit" value="업로드">
+            <form action="/post" method="post" enctype="multipart/form-data">
+                <div class="modal-header" style="height : 40px;">
+                    <span class="modal-title" id="exampleModalLabel" style="font-weight: 600;">새 게시물</span>
+                    <button type="submit" class="btn btn-primary submit-button">등록</button>
+                </div>
+
+
+
+                <div class="modal-body" style="display : flex; justify-content: center;">
+
+                    <div class="form-group" style="display : flex; flex-direction: column;">
+                        <input class="form-control" type="file" id="formFile" name="files" multiple>
+
+                        <section class="product_img_block">
+                            <div class="product_img">
+                                <div class="upload-box">
+                                    <div class="plus">+</div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <div>
+                            <label>PREVIEW</label>
+                            <div id="preview"></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="form-group" style="height : 38px;">
+                            <img th:src="${#authentication.getPrincipal().getUser().getProfile()}" style="width:22px;height:22px;border-radius:50%;" />
+                            <label for="nickname"></label>
+                            <input type="text" id="nickname" name="nickname" th:value="${#authentication.getPrincipal().getUser().getNickname()}" style="border : 1px solid white;"readonly/>
+                            <input type="text" id="email" name="email" th:value="${#authentication.getPrincipal().getUser().getEmail()}" style="border : 1px solid white; color : gray;"readonly/>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contents"></label>
+                            <textarea id="contents" name="contents" rows="4" style="width : 300px;height : 300px;" required></textarea>
+                        </div>
+
+                        <div class="modal-footer">
+
+                        </div>
+                    </div>
+                </div>
             </form>
         </div>
     </div>
-</header>
+</div>
+
+<!-- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
 <main>
-    <div class="board-container">
-        <th:block th:each="board : ${myBoards}">
-            <div class="board-item">
-                <div class="idbox">
-                    <div id = board_id th:text="${board.email}">id</div>
-                    <div>
-                        <button class="menu-btn"><img src="/images/menuicon.png" max-width="100%" height="40"/></button>
-                        <!-- 세부 버튼 영역 (초기에는 숨김) -->
-                        <ul class="sub-menu" style="display: none;">
-                            <!-- 세부 버튼들 -->
-                            <a th:href="@{'/update?number=' + ${board.number}}" class="update">수정<img src="/images/pencil.png" max-width="100%" height="40"/></a>
-                            <!-- 게시물 삭제 버튼 추가 -->
-                            <a class="btn btn-warning delete_btn" th:data-no="${board.number}">삭제<img src="/images/scissors.png" max-width="100%" height="40"/></a>
+    <section>
+        <div class="profile">
 
-                        </ul>
-                    </div>
+            <div class="profileimg" style="display:flex;justify-content:center; align-items : center;">
+                <img th:src="${#authentication.getPrincipal().getUser().getProfile()}" style="width:150px;height:150px;border-radius:50%;" />
+            </div>
+
+            <div class="menu">
+                <div class="top-menu">
+                    <span th:text="${#authentication.getPrincipal().getUser().getNickname()}" >사용자 닉네임</span>
+                    <a href="/profile/update"><button type="button" class="btn btn-outline-secondary">정보 수정</button></a>
                 </div>
 
-                <div id = board_img>
-                    <!-- 이미지 썸네일을 표시하는 이미지 태그 -->
-                    <img th:if="${not #strings.isEmpty(board.filename)}"
-                         th:src="@{file:///C:/upload/user1/0ccb83f9-129e-46de-b4f4-b046a82b833d/${board.dirpath}/${board.filename}}"
-                         alt="Thumbnail" width="200" height="auto" class="thumbnail">
-                </div>
-                <div id=board_contents class="contents" th:text="${board.contents}">contents</div>
-                <div th:text="${board.date}">date</div>
-                <div id="board_hits_like">
-                    <div th:text="${board.hits}">hits</div>
-                    <div th:text="${board.like_count}">like</div>
+                <div class="follow-box">
+                    <a class="follower">
+                        팔로워
+                        <span class="no">100</span>
+                    </a>
+                    <a class="following">
+                        팔로잉
+                        <span class="no">100</span>
+                    </a>
                 </div>
             </div>
-        </th:block>
-    </div>
+        </div>
+
+
+
+        <!-- --------------------------------------------------------------------------------------------------------------------------- -->
+
+        <div class="s_board" style="width : 1000px; display : flex; justify-content: left; flex-wrap : wrap; margin-left : 0px;">
+
+            <th:block th:each="board : ${myBoards}">
+                <div class="board-item">
+
+                    <div class="btn-group dropend">
+                        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
+                                <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
+                            </svg>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <!-- 게시물 수정 버튼 -->
+
+                            <li><a th:href="@{'/update?number=' + ${board.number}}" class="dropdown-item">수정</a></li>
+                            <!-- 게시물 삭제 버튼 -->
+                            <li><a class="delete_btn dropdown-item" th:data-no="${board.number}">삭제</a></li>
+                        </ul>
+                    </div>
+
+                    <a th:href="'/read/' + ${board.number}">
+                        <div id = board_img>
+                            <!-- 이미지 썸네일을 표시하는 이미지 태그 -->
+                            <div class="img">
+                                <img th:src="@{${board.dirpath} + '/' + ${#strings.replace(#strings.replace(board.filename, '[', ''), ']', '')}}" width="300" height="300"/>
+                            </div>
+                        </div>
+                    </a>
+
+                </div>
+            </th:block>
+        </div>
+
+    </section>
+
+    <!-- ------------------------------------------------------------------------------------------------------------------------------------- -->
+
 </main>
 
 <!-- axios -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js" integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<!-- common.js   -->
-<script src="/js/common.js"></script>
+
 
 <script>
     // 프로필 사진 변경 버튼 클릭 시 모달 열기
@@ -326,38 +405,151 @@
 
 
 <script>
-    // menu-btn을 클릭하면 세부 버튼 영역을 표시/숨김
-    var menuBtns = document.querySelectorAll(".menu-btn");
 
-    menuBtns.forEach(function (menuBtn) {
-        menuBtn.addEventListener("click", function () {
-            var subMenu = this.nextElementSibling; // 다음 요소인 sub-menu 가져오기
-            if (subMenu.style.display === "none" || subMenu.style.display === "") {
-                subMenu.style.display = "block"; // 표시
-            } else {
-                subMenu.style.display = "none"; // 숨김
+
+    // 모든 .delete_btn 요소를 선택
+    var deleteBtns = document.querySelectorAll('.delete_btn');
+
+    // 모든 삭제 버튼에 이벤트 리스너 등록
+    deleteBtns.forEach(function (deleteBtn) {
+        deleteBtn.addEventListener('click', function () {
+            const number = deleteBtn.getAttribute('data-no');
+            axios.delete("/delete?number=" + number)
+                .then(function (response) {
+                    console.log(response);
+                    if (response.status === 200) {
+                        location.href = "/list";
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        });
+    });
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById('searchButton').addEventListener('click', function(event) {
+        event.preventDefault(); // 기본 동작을 막습니다.
+
+        // 폼을 가져오고, action 속성을 변경한 다음 폼을 제출합니다.
+        var form = document.getElementById('searchForm');
+        var selectedOption = document.getElementById('searchOption').value; // 선택된 검색 옵션 가져오기
+        if (selectedOption === 'nickname') {
+            form.action = '/list/search-nickname'; // 닉네임 검색을 위한 URL로 변경
+        } else {
+            form.action = '/list/search-contents'; // 내용 검색을 위한 URL로 변경
+        }
+            form.submit(); // 폼 제출
+        });
+    });
+</script>
+
+<script>
+    // .up 엘리먼트를 클릭하면 페이지 상단으로 스크롤
+    document.querySelector(".up").addEventListener("click", function() {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth" // 부드러운 스크롤 사용
+        });
+    });
+</script>
+
+<script>
+    // 스크롤 위치 저장
+    window.addEventListener("scroll", function () {
+        localStorage.setItem("scrollPosition", window.scrollY);
+    });
+
+    // 페이지 로드 시 스크롤 위치 복원
+    window.addEventListener("load", function () {
+        const scrollPosition = localStorage.getItem("scrollPosition");
+        if (scrollPosition) {
+            window.scroll({
+                top: scrollPosition,
+                behavior: "auto"
+            });
+        }
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+    $('.like-button').click(function(event) {
+        event.preventDefault();
+        var url = $(this).attr('href');
+        $.ajax({
+            type: 'GET',
+            url: url,
+            success: function(data) {
+                // 성공적으로 좋아요를 업데이트한 경우
+                console.log('좋아요 업데이트 성공');
+                window.location.href = "/mypage";
+            },
+            error: function() {
+                console.error('좋아요 업데이트 실패');
             }
         });
     });
+});
+</script>
 
-// 모든 .delete_btn 요소를 선택
-var deleteBtns = document.querySelectorAll('.delete_btn');
+<script>
+    const formData = new FormData();	//폼관련 정보 저장
 
-// 모든 삭제 버튼에 이벤트 리스너 등록
-deleteBtns.forEach(function (deleteBtn) {
-    deleteBtn.addEventListener('click', function () {
-        const number = deleteBtn.getAttribute('data-no');
-        axios.delete("/delete?number=" + number)
-            .then(function (response) {
-                console.log(response);
-                if (response.status === 200) {
-                    location.href = "/list";
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-    });
+const uploadBox_el = document.querySelector('.upload-box');
+//dragenter / dragover /dragleave / drop
+
+uploadBox_el.addEventListener('dragenter',function(e){
+    e.preventDefault();
+    console.log("dragenter...");
+});
+uploadBox_el.addEventListener('dragover',function(e){
+    e.preventDefault();
+    uploadBox_el.style.opacity='0.5';
+    console.log("dragover...");
+
+});
+uploadBox_el.addEventListener('dragleave',function(e){
+    e.preventDefault();
+    uploadBox_el.style.opacity='1';
+    console.log("dragleave...");
+
+});
+
+//----------------------------------------------
+//
+//----------------------------------------------
+uploadBox_el.addEventListener('drop',function(e){
+    e.preventDefault();
+    console.log("drop...");
+    console.log(e);
+    console.log(e.dataTransfer);
+    console.log(e.dataTransfer.files[0]);
+
+    //유효성체크(이미지만, 하나씩만 , 용량제한 ...)
+    // 파일 유형 확인 및 이미지 파일만 처리
+    const imageFiles = Array.from(e.dataTransfer.files).filter(file => file.type.startsWith('image/'));
+    if (imageFiles.length === 0) {
+            alert("이미지 파일만 가능합니다");
+            return;
+    }
+    //총이미지의 개수가 5개 이상이면 return(아직..)
+
+    //미리보기
+    const file = e.dataTransfer.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function(event) {
+        const preview = document.getElementById('preview');
+        const img = document.createElement('img')
+        img.setAttribute('src',event.target.result);
+        preview.appendChild(img);
+    };
+    //formData에 저장
+    formData.append('files',file);
+
 });
 </script>
 

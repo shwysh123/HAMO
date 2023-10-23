@@ -3,114 +3,518 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
     <!-- 구글폰트 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@500&display=swap" rel="stylesheet">
 
-    <style>
-*{
- font-family: 'Gothic A1', sans-serif;
-}
-body {
- width: 1024px;
- height: 700px;
- margin: 50px auto;
- overflow: auto;
- max-height: 860px;
- position : relative;
- top : 80px;
-}
-.nlogoimg{
-    position : relative;
-    top : 20px;
-    left : 80px;
-}
-.big{
-    display : flex;
-    align-items: center;
-    justify-content: space-around;
-}
-.loginform{
-    position : relative;
-    right : 100px;
-    width : 300px;
-    height : 300px;
-    display: flex; /* 수직 중앙 정렬을 위해 flex 컨테이너로 설정 */
-    flex-direction: column; /* 하위 요소들을 수직으로 배치 */
-    justify-content: center; /* 수직 가운데 정렬 */
-    align-items: center;
-}
-.inputbox{
-    display: flex;
-}
-.idpw > input{
-    margin-bottom : 10px;
-    height : 30px;
-    font-size: 16px;
-}
-.form-check{
-    font-size: 14px;
-}
-.jechul{
-    width : 183px;
-    height : 45px;
-    margin-top : 10px;
-    margin-bottom : 5px;
-    position : relative;
-    left : 12px;
-    background-color: #4a596d;
-    border-radius: 7px;
-    color : #cfd7e0;
-    border-style: none;
-    font-size: 15px;
-    cursor: pointer;
-}
-.join{
-    position : relative;
-    left : 550px;
-    bottom : 20px;
-}
+    <!-- 부트스트랩 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 
-</style>
+    <style>
+        *{
+         font-family: 'Gothic A1', sans-serif;
+        }
+
+        body {
+         margin: 50px auto;
+         overflow: auto;
+         max-height: 860px;
+         position : relative;
+         top : 80px;
+        }
+
+        .logo{
+            height : 113px;
+            display : flex;
+            align-items: center;
+        }
+
+        .big{
+            display : flex;
+            flex-direction: column;
+            align-items: center;
+
+        }
+
+        .loginform{
+            width : 348px;
+            height : 379.984px;
+            padding-top : 10px;
+            padding-bottom : 10px;
+            margin-bottom : 10px;
+
+            border : 1px solid rgb(204, 204, 204);
+
+            display: flex; /* 수직 중앙 정렬을 위해 flex 컨테이너로 설정 */
+            flex-direction: column; /* 하위 요소들을 수직으로 배치 */
+            align-items: center;
+        }
+
+        .idpw{
+        }
+
+        .idpw > input{
+            width : 226px;
+            height : 36px;
+            font-size: 13px;
+        }
+        .form-check{
+          margin-top : 10px;
+          margin-bottom : 20px;
+            font-size: 14px;
+        }
+
+        .loginbtn{
+          padding-bottom : 20px;
+          margin-bottom : 30px;
+        }
+
+        .join{
+
+        }
+
+        .forget{
+            color : black;
+            text-decoration: none;
+        }
+
+        .forget:hover{
+            color : rgb(3, 153, 212);
+            font-weight: 600;
+        }
+
+        .btn-lg{
+            width : 230px;
+            height :30px;
+            margin-bottom : 20px;
+            border-radius: 7px;
+            color : #cfd7e0;
+            border-style: none;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        .find{
+        }
+        .join{
+            width : 348px;
+            height : 70px;
+            border : 1px solid rgb(204, 204, 204);
+            display : flex;
+            align-items: center;
+            justify-content: center;
+            padding-top : 10px;
+            padding-bottom : 10px;
+            margin-bottom : 10px;
+            font-size: 0.9rem;
+        }
+
+        .join>button{
+            border-style: none;
+            background-color: white;
+            color : rgb(3, 153, 212);
+            font-weight: 600;
+        }
+
+        .otherlogin{
+            display: flex;
+        }
+        .otherlogin>div:first-child{
+            margin-right : 20px;
+        }
+
+    </style>
 
 </head>
 <body>
+<main>
+    <div class="big">
 
-<div class="big">
+        <div class="loginform">
 
+            <form action="/login" method="post" onsubmit="return validateLoginForm()">
+                <div class="logo">
+                    <img src="images/logo.png" class="nlogoimg" max-width="100%" height="30"/>
+                </div>
+                <div class="idpw">
+                    <input class="form-control" name="username" id="username" placeholder="EMAIL"><br/>
+                    <input class="form-control" name="password" type="password" id="password" placeholder="PASSWORD" style="position : relative; bottom : 20px;"><br/>
 
-    <img src="/images/nlogo.png" class="nlogoimg" max-width="100%" height="400"/>
-    <div class="loginform">
-        <form action="/login" method="post" onsubmit="return validateLoginForm()">
+                </div>
 
-            <div class="idpw">
-                <input name="username" id="username" placeholder="EMAIL"><br/>
-                <input name="password" type="password" id="password" placeholder="PASSWORD"><br/>
+                <div class="loginbtn">
+
+                    <!-- <input type="submit" class="jechul" value="HAMOHAMO 로그인"/> -->
+                    <button type="submit" class="btn btn-secondary btn-lg" style="position : relative; bottom : 30px;">Login</button>
+                </div>
+            </form>
+
+            <div class="find" style="width : 230px;border-top : 1px solid rgb(194, 194, 194);padding-top : 30px;text-align: center;position : relative;bottom : 50px;">
+                <a href="/findid" class="forget" style="font-size: 0.8rem; ">계정을 잊으셨나요?</a><br/>
+                <a href="/emailcheck" class="forget" style="font-size: 0.8rem; ">패스워드를 잊으셨나요?</a>
             </div>
 
-            <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="rememberMe" name="remember-me"/>
-                <label class="form-check-label" for="rememberMe">로그인 상태를 유지</label>
+
+
+        <div class="join">
+            계정이 없으신가요?
+            <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                가입하기
+            </button>
+        </div>
+
+
+        <div class="otherlogin" style="margin-top : 20px;">
+            <div><a href="/oauth2/authorization/kakao"><img src="images/kakaologin.png" width=100% height=45px/></a></div>
+            <div><a href="/oauth2/authorization/naver"><img src="images/naverlogin.png" width=100% height=45px/></a></div>
+        </div>
+
+    </div>
+</main>
+
+
+
+
+
+
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">HAMOHAMO 회원가입</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            <div class="modal-body">
 
-            <input type="submit" class="jechul" value="HAMOHAMO 로그인"/>
+                <form name="joinform" action="/join" method="post" onsubmit="return false">
+                    <br/>
+                    <span for="emailInput">이메일</span>
+                    <div style="display: flex;">
+                        <input name="email" id="emailInput" class="form-control">
+                        <button class="btn btn-secondary jung-btn" onclick="checkDuplicate('emailInput')" style="width : 160px; font-size: 0.8rem; margin-left : 17px;">중복체크</button>
+                    </div>
+                    <br/>
 
-        </form>
-        <div class="otherlogin">
-            <div><a href="/oauth2/authorization/kakao"><img src="/images/kakaologin.png" width=183px height=45px/></a></div>
-            <div><a href="/oauth2/authorization/naver"><img src="/images/naverlogin.png" width=183px height=45px/></a></div>
+                    <span for="passwordInput">비밀번호</span>
+                    <div>
+                        <input name="password" type="password" id="passwordInput" class="form-control">
+                    </div>
+                    <br/>
+                    <span for="passwordConfirmInput">비밀번호확인</span>
+                    <div>
+                        <input name="passwordConfirm" type="password" id="passwordConfirmInput" class="form-control">
+                    </div>
+                    <br/>
+                    <span for="nicknameInput">사용할 닉네임</span>
+                    <div style="display: flex;">
+                        <input name="nickname" id="nicknameInput" class="form-control">
+                        <button class="btn btn-secondary jung-btn" onclick="checkNicknameDuplicate('nicknameInput')" style="width : 160px; font-size: 0.8rem; margin-left : 17px;">중복체크</button>
+                    </div>
+                    <br/>
+                    <span for="nameInput">성명</span>
+                    <div>
+                        <input name="name" id="nameInput" class="form-control">
+                    </div>
+                    <br/>
+                    <span for="birthInput">생년월일</span>
+                    <div>
+                        <input name="birth" id="birthInput" autocomplete="off" class="form-control">
+                    </div>
+                    <br/>
+                    <span for="phoneInput">휴대폰</span>
+                    <div style="display: flex;">
+                        <input name="phone" id="phoneInput" maxlength="13" class="form-control">
+                        <button class="btn btn-secondary jung-btn" onclick="checkPhoneDuplicate('phoneInput')" style="width : 160px; font-size: 0.8rem; margin-left : 17px;">중복체크</button><br/>
+
+                    </div>
+                    <br/>
+                    <span>주소</span>
+                    <div>
+                        <div style="display : flex;">
+                            <input name="zipcode" class="form-control zipcode"  placeholder="우편번호" >
+                            <button class="btn btn-secondary search_addr_btn" style="width : 160px; font-size: 0.8rem; margin-left : 17px;">주소검색</button>
+                        </div>
+
+                        <input name="addr1" class="form-control addr1"  placeholder="기본주소" style="width : 330px; margin-top : 5px;">
+                        <input name="addr2" class="form-control" placeholder="상세주소 입력" style="width : 330px; margin-top : 5px;">
+                    </div>
+                    <br/>
+                    <span for="questionInput">질문 선택</span>
+                    <div>
+                        <select class="form-select" aria-label=".form-select-sm example" name="question" id="questionInput" style="font-size : 1.0rem;">
+                            <option value="질문1">당신의 어린시절 별명은?</option>
+                            <option value="질문2">당신이 가장 존경하는 사람은?</option>
+                            <option value="질문3">당신의 보물 제1호는?</option>
+                            <option value="질문4">당신의 인생 좌우명은?</option>
+                            <option value="질문5">당신의 MBTI는?</option>
+                            <option value="질문6">당신이 가장 즐겨하는 게임은?</option>
+                        </select>
+                    </div>
+                    <br/>
+                    <span for="answerInput">답변</span>
+                    <div>
+                        <input name="answer" id="answerInput" type="text" class="form-control">
+                    </div>
+
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <div class="jechul">
+                            <button onclick="isValid()" class="btn btn-secondary joinbtn">회원가입</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-
 </div>
 
-<div class="join">
-    회원이 아니신가요?&nbsp;&nbsp;<a href="/join">회원가입</a>
-</div>
+<script>
+    <!-- 이메일중복체크  -->
+        let isEmailChecked = false;
+        let isNicknameChecked = false;
+        let isPhoneChecked = false;
+
+        function checkDuplicate(emailInput) {
+            const inputValue = $("#" + emailInput).val();
+            $.ajax({
+                url: "/checkDuplicate",
+                type: "POST",
+                data: {value: inputValue, field: emailInput},
+                success: function (response) {
+                    if (response.duplicate) {
+                          alert("이미 존재하는 이메일입니다.");
+                          isEmailChecked = false;
+                    } else {
+                        alert("사용 가능한 이메일입니다.");
+                        isEmailChecked = true;
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error("오류 발생 : ", error);
+                    isEmailChecked = false;
+                }
+            });
+        }
+
+    <!--닉네임 중복체크-->
+        function checkNicknameDuplicate(nicknameInput) {
+            const inputValue = $("#" + nicknameInput).val();
+            $.ajax({
+                url: "/checkNicknameDuplicate",
+                type: "POST",
+                data: {value: inputValue, field: nicknameInput},
+                success: function (response) {
+                    if (response.duplicate) {
+                          alert("이미 존재하는 닉네임입니다.");
+                          isNicknameChecked = false;
+                    } else {
+                        alert("사용 가능한 닉네임입니다.");
+                        isNicknameChecked = true;
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error("오류 발생 : ", error);
+                    isNicknameChecked = false;
+                }
+            });
+        }
+
+    <!--휴대폰 숫자제외 입력 제한-->
+        const phoneInput = document.getElementById("phoneInput");
+
+        phoneInput.addEventListener("input", function(){
+            const inputValue = phoneInput.value.replace(/\D/g, "");
+    <!--   길이와 하이픈 생성-->
+            phoneInput.value = inputValue;
+
+     if (inputValue.length >= 7) {
+            phoneInput.value =
+                inputValue.slice(0, 3) +
+                "-" +
+                inputValue.slice(3, 7) +
+                "-" +
+                inputValue.slice(7);
+        }
+    });
+    <!--비밀번호 형식체크-->
+    function isValidPassword(password){
+        const passwordPattern = /^(?=.*[a-z])(?=.*[!@#$%^&*])(?=.*\d).{8,16}$/;
+        return passwordPattern.test(password);
+        }
+        const passwordInput = document.getElementById("passwordInput");
 
 
 
+</script>
+<script>
+    <!--휴대폰번호 중복-->
+        function checkPhoneDuplicate(phoneInput){
+        const inputValue = $("#" + phoneInput).val();
+        $.ajax({
+            url: "/checkPhoneDuplicate",
+            type: "POST",
+            data: { value: inputValue, field: phoneInput},
+            success: function (response) {
+                if (response.duplicate){
+                    alert("이미 가입에 사용된 번호입니다.");
+                    isPhoneChecked = false;
+                } else {
+                    alert("가입에 사용 가능한 번호입니다.");
+                    isPhoneChecked = true;
+                }
+        },
+        error: function (xhr, status, error){
+            console.error("오류 발생 : ",error);
+            isPhoneChecked = false;
+        }
+        });
+        }
+
+</script>
+<script>
+    <!--    생년월일 입력 필드에 Datepicker를 적용합니다.-->
+        $(function() {
+            $("#birthInput").datepicker({
+                dateFormat: "yy-mm-dd", // 날짜 형식 설정 (연도-월-일)
+                changeMonth: true,      // 월 선택 가능
+                changeYear: true,       // 연도 선택 가능
+                yearRange: "c-100:c+10", // 년도 선택 범위 설정
+                beforeShow: function(input, inst){
+                $(input).prop('readOnly', true);
+                }
+            });
+        });
+<!--회원가입 버튼누를시 빈칸이나 중복체크를 안했을때-->
+        const isValid = () => {
+            const form = document.joinform;
+            const password = passwordInput.value;
+            const passwordConfirm = form.passwordConfirm.value.trim();
+            const phoneInput = form.phoneInput.value.trim();
+            const email = emailInput.value;
+            const secret = isValidPassword(password);
+
+
+
+            if (form.email.value.trim() ==  "")
+            {
+                alert("이메일을 입력하세요.");
+                return;
+            }
+            const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            if (!emailPattern.test(email)){
+                alert("올바른 이메일 주소 형식이 아닙니다.");
+                return;
+            }
+            if (!isEmailChecked){
+                alert("이메일 중복 체크를 해주세요.");
+                return;
+            }
+            if (password == "")
+            {
+                alert("비밀번호를 입력하세요.");
+                return;
+            }
+            if (!secret) {
+                alert("비밀번호 양식에 맞춰서 입력하세요.");
+                return;
+            }
+            if (passwordConfirm == "")
+            {
+                alert("비밀번호를 다시입력하세요.");
+                return;
+            }
+            if (password != passwordConfirm)
+            {
+                alert("비밀번호가 일치하지 않습니다.");
+                return;
+            }
+            if (form.nickname.value.trim() == "")
+            {
+                alert("닉네임을 입력하세요.");
+                return;
+            }
+            if (!isNicknameChecked) {
+                alert("닉네임 중복 체크를 해주세요.");
+                return;
+            }
+             if (form.name.value.trim() == "")
+            {
+                alert("이름을 입력하세요.");
+                return;
+            }
+            if (form.birth.value.trim() == "")
+            {
+                alert("생년월일을 입력하세요.");
+                return;
+            }
+            if (form.phone.value.trim() == "")
+            {
+                alert("휴대폰번호를 입력하세요.");
+                return;
+            }
+            const pattern = /^010-\d{4}-\d{4}$/;
+            if (!pattern.test(phoneInput)){
+                alert("올바른 휴대폰 번호를 입력하세요.");
+                return;
+            }
+            if (form.zipcode.value.trim() == "")
+            {
+                alert("우편번호를 입력하세요.");
+                return;
+            }
+            if (form.addr2.value.trim() == "")
+            {
+                alert("상세주소를 입력하세요.");
+                return;
+            }
+            if (form.answer.value.trim() == "")
+            {
+                alert("질문의 답을 입력하세요.");
+                return;
+            }
+            alert("하모하모에 가입을 환영합니다! 🤸‍♂️");
+
+            window.location.href = "/login";
+
+       form.submit();
+        }
+</script>
+
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+
+    const search_addr_btn = document.querySelector('.search_addr_btn');
+    search_addr_btn.addEventListener('click',function(){
+       new daum.Postcode({
+                oncomplete: function(data) {
+                    console.log(data);
+                    const zipcode = document.querySelector('.zipcode');
+                    const addr1 = document.querySelector('.addr1');
+
+                    if(data.userSelectedType==='R')
+                    {
+                        addr1.value = data.roadAddress;
+                    }
+                    else
+                    {
+                        addr1.value = data.jibunAddress;
+                    }
+                    zipcode.value=data.zonecode;
+
+                }
+            }).open();
+
+    });
+</script>
 <script>
 
 

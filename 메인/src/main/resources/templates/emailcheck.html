@@ -118,28 +118,25 @@
                 </div>
         </form>
     </div>
+    <div class="formbox">
+        <form name="resetpwform" action="/resetpw" method="post" onsubmit="return false">
+            <div>
+                <div>
+                    <h5 for="passwordInput">새로운 비밀번호</h5>
+                    <input name="password" id="passwordInput" type="password"><br/>
+                </div>
+                <div>
+                    <h5 for="passwordConfirmInput">비밀번호 확인</h5>
+                    <input name="passwordConfirm" id="passwordConfirmInput" type="password">
+                </div>
+            </div>
+            <div class="jechul">
+                <button onclick="resetpw()">비밀번호 재설정하기</button>
+            </div>
+
+        </form>
+    </div>
 </main>
-
-<script>
-        function checkcodeFunction(){
-        const enteredCode = document.getElementById("codeInput").value;
-
-        axios.post("/checkcode", { code: enteredCode})
-            .then((response) => {
-                if(response.data === "authenticated"){
-                alert("인증이 완료되었습니다.");
-                window.location.href = "/resetpw";
-                }else{
-                alert("인증 코드가 올바르지 않습니다.");
-                }
-                })
-        .catch((error) => {
-        alert("오류가 발생했습니다.");
-        console.error("인증 코드 확인 중 오류 발생 : ", error);
-        });
-    }
-</script>
-
 
 <script>
     let isEmailChecked = false;
@@ -150,6 +147,16 @@
             type: "POST",
             data: {value: inputValue, field: emailInput},
             success: function (response) {
+
+            const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            const emailInput = document.getElementById("emailInput");
+            const email = emailInput.value;
+
+            if (!emailPattern.test(email)) {
+            alert("올바른 이메일 주소 형식이 아닙니다.");
+            return;
+            }
+
                 if (response.duplicate) {
                       alert("가입된 EMAIL입니다. 인증번호를 보내주세요.");
                       isEmailChecked = false;
@@ -167,7 +174,6 @@
         });
     }
 
-
     function sendemailFunction(){
     if(isEmailChecked) {
     alert("회원 가입유무를 먼저 체크해주세요🙏");
@@ -180,12 +186,86 @@
         .then((response) => {
         alert("메일이 전송되었습니다.");
         console.log("인증코드 : "+response.data);
+        sendCode = response.data;
     })
     .catch((error) => {
         alert("오류가 발생했습니다.");
         console.error("메일 전송 중 오류 발생 : ", error);
         });
     }
+
+
+    let sendCode  = "";
+    let checkok = false;
+    function checkcodeFunction(){
+        const enteredCode = document.getElementById("codeInput").value;
+
+        if (!enteredCode) {
+        alert("인증 코드를 입력해주세요.");
+        return;
+        }
+        if(enteredCode === sendCode){
+        alert("인증이 완료되었습니다!");
+        checkok = true;
+        } else {
+        alert("인증코드가 올바르지 않습니다.");
+        checkok = false;
+        }
+    }
+    </script>
+<script>
+    function resetpw() {
+
+               if (checkok === false)
+              {
+                  alert("인증을 먼저 해주세요.");
+                  return;
+              }
+              const email = document.getElementById("emailInput").value;             const passwordInput = document.getElementById("passwordInput");
+              const passwordConfirmInput = document.getElementById("passwordConfirmInput");
+              const password = passwordInput.value;
+              const passwordConfirm = passwordConfirmInput.value;
+              const Pattern = /^(?=.*[a-z])(?=.*[!@#$%^&*])(?=.*\d).{8,16}$/;
+
+
+
+              if (password === "")
+              {
+                  alert("비밀번호를 입력하세요.");
+                  return;
+              }
+              if (!Pattern.test(password))
+              {
+                  alert("비밀번호 양식에 맞춰서 입력하세요.");
+                  return;
+              }
+              if (passwordConfirm === "")
+              {
+                  alert("비밀번호를 다시입력하세요.");
+                  return;
+              }
+              if (password !== passwordConfirm)
+              {
+                  alert("비밀번호가 일치하지 않습니다.");
+                  return;
+             }
+
+             axios.post("/resetpw", {email: email, newPassword: password})
+             .then((response) => {
+             if(response.data === "success"){
+              alert("비밀번호가 재설정되었습니다 🤸‍♂️");
+              window.location.href = "/login";
+              } else {
+              alert("비밀번호 재설정에 실패하였습니다");
+              }
+              })
+              .catch((error) => {
+              alert("오류가 발생했습니다.");
+              console.error("비밀번호 재설정 중 오류 발생 : " , error);
+              });
+
+          }
+
 </script>
 
 </body>

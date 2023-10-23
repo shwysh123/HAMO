@@ -18,22 +18,21 @@ public class CheckCodeRestController {
 
     @Autowired
     private EmailService emailService;
-    @Autowired
-    private Model model;
+
 
     @PostMapping("/checkcode")
     public ResponseEntity<String> checkCode(@RequestBody Map<String, String> requestBody, HttpServletRequest request) {
 
-        String userEnteredCode = requestBody.get("code");
+        String enteredCode = requestBody.get("code");
 
-        String storedCode = (String) model.getAttribute("ePw");
+        HttpSession session = request.getSession();
+        String storedCode = (String) session.getAttribute("ePw");
 
-        if (storedCode != null && storedCode.equals(userEnteredCode)) {
-
-            return new ResponseEntity<>("authenticated", HttpStatus.OK);
+        if (storedCode != null && storedCode.equals(enteredCode)) {
+            return ResponseEntity.ok("인증완료");
         } else {
-
-            return new ResponseEntity<>("not-authenticated", HttpStatus.OK);
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("인증실패");
         }
+
     }
-}
+    }
