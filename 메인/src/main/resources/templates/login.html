@@ -175,8 +175,12 @@
             <div><a href="/oauth2/authorization/kakao"><img src="images/kakaologin.png" width=100% height=45px/></a></div>
             <div><a href="/oauth2/authorization/naver"><img src="images/naverlogin.png" width=100% height=45px/></a></div>
         </div>
-
+        </div>
     </div>
+
+    <a href="" style="font-size: 0.8rem; color : black;
+            text-decoration: none;" onclick="opendraw()">그림그리기</a>
+
 </main>
 
 
@@ -529,6 +533,12 @@
         }
 
         return true;
+    }
+</script>
+
+<script>
+    function opendraw() {
+            window.location.href = "/draw";
     }
 </script>
 

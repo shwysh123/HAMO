@@ -46,4 +46,6 @@ public class SimpleController {
 	public void sendemail_get() {log.info("GET/sendemail"); }
 	@GetMapping("/checkcode")
 	public void checkCode_get() {log.info("GET/checkcode"); }
+	@GetMapping("/draw")
+	public void draw_get() {log.info("GET/draw"); }
 }
