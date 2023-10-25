@@ -92,7 +92,7 @@ canvas{
     <!-- 되돌리기, 지우기, 다운로드 버튼  -->
     <button onclick="undo_last()" type="button" class="button">되돌리기</button>
     <button onclick="clear_canvas()" type="button" class="button">지우기</button>
-    <button onclick="save()" type="button" class="button">저장하기</button>
+    <button onclick="save()" type="button" class="button">업로드하기</button>
 </div>
 
 
@@ -190,15 +190,25 @@ function undo_last(){
 }
 
 // 저장하기
-function save(){
-    canvas.toBlob((blob)=>{
+function save() {
+  const canvas = document.getElementById('canvas');
+  const imgBase64 = canvas.toDataURL('image/jpeg', 1.0); // 이미지 데이터를 base64 형식으로 얻습니다
 
-        const a = document.createElement('a');
-        document.body.append(a);
-        a.download ='export{timestamp}.png';
-        a.href= URL.createObjectURL(blob);
-        a.click();
-        a.remove();
+  const formData = new FormData();
+  formData.append('image', imgBase64);
+
+  fetch('/post', {
+    method: 'POST',
+    body: formData,
+  })
+    .then(response => response.json())
+    .then(data => {
+      // 서버에서 이미지 업로드 및 게시물 추가 후의 응답을 처리합니다.
+      console.log(data);
+      alert('이미지가 게시물에 추가되었습니다.');
+    })
+    .catch(error => {
+      console.error('업로드 및 게시물 추가 중 오류 발생: ' + error);
     });
 }
 </script>

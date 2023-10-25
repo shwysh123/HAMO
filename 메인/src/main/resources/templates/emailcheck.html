@@ -174,25 +174,31 @@
         });
     }
 
-    function sendemailFunction(){
-    if(isEmailChecked) {
-    alert("회원 가입유무를 먼저 체크해주세요🙏");
-    return;
+   function sendemailFunction() {
+    if (isEmailChecked) {
+        alert("회원 가입유무를 먼저 체크해주세요🙏");
+        return;
     }
 
-    const email = document.getElementById("emailInput").value;
+    const email = $("#emailInput").val();
+    const data = { email: email };
 
-    axios.post("/sendemail?email=" + email, {email: email})
-        .then((response) => {
-        alert("메일이 전송되었습니다.");
-        console.log("인증코드 : "+response.data);
-        sendCode = response.data;
-    })
-    .catch((error) => {
-        alert("오류가 발생했습니다.");
-        console.error("메일 전송 중 오류 발생 : ", error);
-        });
-    }
+    $.ajax({
+        type: 'POST',
+        url: '/sendemail?email=' + email,
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        success: function (response) {
+            alert("메일이 전송되었습니다.");
+            console.log("인증코드: " + response);
+            sendCode = response;
+        },
+        error: function (error) {
+            alert("오류가 발생했습니다.");
+            console.error("메일 전송 중 오류 발생: ", error);
+        }
+    });
+}
 
 
     let sendCode  = "";
@@ -221,12 +227,12 @@
                   alert("인증을 먼저 해주세요.");
                   return;
               }
-              const email = document.getElementById("emailInput").value;             const passwordInput = document.getElementById("passwordInput");
-              const passwordConfirmInput = document.getElementById("passwordConfirmInput");
-              const password = passwordInput.value;
-              const passwordConfirm = passwordConfirmInput.value;
-              const Pattern = /^(?=.*[a-z])(?=.*[!@#$%^&*])(?=.*\d).{8,16}$/;
-
+             const email = $("#emailInput").val();
+             const passwordInput = $("#passwordInput");
+             const passwordConfirmInput = $("#passwordConfirmInput");
+             const password = passwordInput.val();
+             const passwordConfirm = passwordConfirmInput.val();
+             const Pattern = /^(?=.*[a-z])(?=.*[!@#$%^&*])(?=.*\d).{8,16}$/;
 
 
               if (password === "")
@@ -250,21 +256,27 @@
                   return;
              }
 
-             axios.post("/resetpw", {email: email, newPassword: password})
-             .then((response) => {
-             if(response.data === "success"){
-              alert("비밀번호가 재설정되었습니다 🤸‍♂️");
-              window.location.href = "/login";
-              } else {
-              alert("비밀번호 재설정에 실패하였습니다");
-              }
-              })
-              .catch((error) => {
-              alert("오류가 발생했습니다.");
-              console.error("비밀번호 재설정 중 오류 발생 : " , error);
-              });
+        const requestData = { email: email, newPassword: password };
 
-          }
+    $.ajax({
+        type: 'POST',
+        url: '/resetpw',
+        contentType: 'application/json',
+        data: JSON.stringify(requestData),
+        success: function (response) {
+            if (response === "success") {
+                alert("비밀번호가 재설정되었습니다 🤸‍♂️");
+                window.location.href = "/login";
+            } else {
+                alert("비밀번호 재설정에 실패하였습니다");
+            }
+        },
+        error: function (error) {
+            alert("오류가 발생했습니다.");
+            console.error("비밀번호 재설정 중 오류 발생: ", error);
+        }
+    });
+}
 
 </script>
 
