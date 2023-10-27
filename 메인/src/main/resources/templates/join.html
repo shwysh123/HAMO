@@ -349,8 +349,14 @@ function isValidPassword(password){
                 return;
             }
             const pattern = /^010-\d{4}-\d{4}$/;
-            if (!pattern.test(phoneInput)){
+            if (!pattern.test(phoneInput))
+            {
                 alert("올바른 휴대폰 번호를 입력하세요.");
+                return;
+            }
+            if(!isPhoneChecked)
+            {
+                alert("휴대폰 번호 중복체크를 해주세요.");
                 return;
             }
             if (form.zipcode.value.trim() == "")
